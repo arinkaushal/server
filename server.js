@@ -64,8 +64,22 @@ app.options('*', cors({
 
 connectDB(MONGO);
 
+// const sessionMiddleware = session({
+//   secret: process.env.SESSION_SECRET || 'dev_secret_key',
+//   resave: false,
+//   saveUninitialized: false,
+//   store: MongoStore.create({
+//     mongoUrl: MONGO
+//   }),
+//   cookie: {
+//     httpOnly: true,
+//     sameSite: "lax",
+//     secure: false,
+//     maxAge: 1000 * 60 * 60 * 24
+//   },
+// });
 const sessionMiddleware = session({
-  secret: process.env.SESSION_SECRET || 'dev_secret_key',
+  secret: 'dev_secret_key',
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
@@ -73,8 +87,8 @@ const sessionMiddleware = session({
   }),
   cookie: {
     httpOnly: true,
-    sameSite: "lax",
-    secure: false,
+    sameSite: 'none',
+    secure: true,
     maxAge: 1000 * 60 * 60 * 24
   },
 });
