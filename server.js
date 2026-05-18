@@ -78,6 +78,7 @@ connectDB(MONGO);
 //     maxAge: 1000 * 60 * 60 * 24
 //   },
 // });
+app.set('trust proxy', 1);
 const sessionMiddleware = session({
   secret: 'dev_secret_key',
   resave: false,
@@ -89,10 +90,11 @@ const sessionMiddleware = session({
     httpOnly: true,
     sameSite: 'none',
     secure: true,
-    maxAge: 1000 * 60 * 60 * 24
+    maxAge: 24 * 60 * 60 * 1000,
+    path: '/'
   },
 });
-
+console.log("added actual proxy trusts and middlware changes");
 app.use(sessionMiddleware);
 
 
